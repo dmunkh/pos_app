@@ -1,12 +1,18 @@
 import { useState } from "react";
 import styles from "./Login.module.css";
+import Toast from "../UI/Toast";
 const Login = (props) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
 
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
+  const [toast, setToast] = useState({
+    showToast: false,
+    message: "",
+    type: "",
+  });
 
   const onChange = (e) => {
     setFormData((prev) => {
@@ -20,13 +26,28 @@ const Login = (props) => {
     e.preventDefault();
 
     if (formData.username.length < 4) {
-      setMessage("username or email should atleast be 4 characters long.");
+      // setMessage("username or email should atleast be 4 characters long.");
+      setToast({
+        showToast: true,
+        message: "username or email should atleast be 4 characters long.",
+        type: "danger",
+      });
       return;
     } else if (formData.password.length < 8) {
-      setMessage("password should atleast be 8 characters long.");
+      // setMessage("password should atleast be 8 characters long.");
+      setToast({
+        showToast: true,
+        message: "password should atleast be 8 characters long.",
+        type: "danger",
+      });
       return;
     }
-    setMessage("");
+    // setMessage("");
+    setToast({
+      showToast: false,
+      message: "",
+      type: "",
+    });
 
     console.log("FORM DATA ", formData);
   };
@@ -57,13 +78,18 @@ const Login = (props) => {
             placeholder='password'
           />
           <button>submit</button>
-          <div className={styles["err-msg-div"]}>{message}</div>
+          {/* <div className={styles["err-msg-div"]}>{message}</div> */}
         </div>
 
         <p className={styles["p-link"]}>
           New User? <span className={styles["link"]}>sign up</span>
         </p>
       </form>
+      {toast.showToast ? (
+        <Toast setToast={setToast} message={toast.message} type={toast.type} />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

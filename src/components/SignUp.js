@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Toast from "../UI/Toast";
 import styles from "./Login.module.css";
 const SignUp = (props) => {
   const [formData, setFormData] = useState({
@@ -9,7 +10,12 @@ const SignUp = (props) => {
     cpassword: "",
   });
 
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
+  const [toast, setToast] = useState({
+    showToast: false,
+    message: "",
+    type: "",
+  });
 
   const onChange = (e) => {
     setFormData((prev) => {
@@ -23,7 +29,12 @@ const SignUp = (props) => {
     e.preventDefault();
 
     if (formData.cpassword !== formData.password) {
-      setMessage("password do not match.");
+      // setMessage("password do not match.");
+      setToast({
+        showToast: true,
+        message: "password do not match.",
+        type: "danger",
+      });
       return;
     } else if (
       formData.fullname.trim().length === 0 ||
@@ -32,19 +43,44 @@ const SignUp = (props) => {
       formData.password.trim().length === 0 ||
       formData.cpassword.trim().length === 0
     ) {
-      setMessage("all fields are required.");
+      // setMessage("all fields are required.");
+      setToast({
+        showToast: true,
+        message: "all fields are required.",
+        type: "danger",
+      });
       return;
-    } else if (formData.fullname.length < 3) {
-      setMessage("full name should atleast 3 charecters long.");
+    } else if (formData.fullname.trim().length < 3) {
+      // setMessage("full name should atleast 3 charecters long.");
+      setToast({
+        showToast: true,
+        message: "full name should atleast 3 charecters long.",
+        type: "danger",
+      });
       return;
-    } else if (formData.username.length < 4) {
-      setMessage("username or email should atleast be 4 characters long.");
+    } else if (formData.username.trim().length < 4) {
+      // setMessage("username or email should atleast be 4 characters long.");
+      setToast({
+        showToast: true,
+        message: "username or email should atleast be 4 characters long.",
+        type: "danger",
+      });
       return;
-    } else if (formData.password.length < 8) {
-      setMessage("password should atleast be 8 characters long.");
+    } else if (formData.password.trim().length < 8) {
+      // setMessage("password should atleast be 8 characters long.");
+      setToast({
+        showToast: true,
+        message: "password should atleast be 8 characters long.",
+        type: "danger",
+      });
       return;
     }
-    setMessage("");
+    // setMessage("");
+    setToast({
+      showToast: false,
+      message: "",
+      type: "",
+    });
 
     console.log("FORM DATA ", formData);
   };
@@ -99,13 +135,18 @@ const SignUp = (props) => {
             placeholder='confirm password'
           />
           <button>submit</button>
-          <div className={styles["err-msg-div"]}>{message}</div>
+          {/* <div className={styles["err-msg-div"]}>{message}</div> */}
         </div>
 
         <p className={styles["p-link"]}>
           Existing user? <span className={styles["link"]}>login</span>
         </p>
       </form>
+      {toast.showToast ? (
+        <Toast setToast={setToast} message={toast.message} type={toast.type} />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
