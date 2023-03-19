@@ -1,10 +1,14 @@
 import { useState } from "react";
-import styles from "./Login.module.css";
-import Toast from "../UI/Toast";
-const Login = (props) => {
+import Toast from "../../UI/Toast";
+import styles from "../Login/Login.module.css";
+
+const SignUp = (props) => {
   const [formData, setFormData] = useState({
+    fullname: "",
+    email: "",
     username: "",
     password: "",
+    cpassword: "",
   });
 
   // const [message, setMessage] = useState("");
@@ -25,7 +29,37 @@ const Login = (props) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    if (formData.username.length < 4) {
+    if (formData.cpassword !== formData.password) {
+      // setMessage("password do not match.");
+      setToast({
+        showToast: true,
+        message: "password do not match.",
+        type: "danger",
+      });
+      return;
+    } else if (
+      formData.fullname.trim().length === 0 ||
+      formData.email.trim().length === 0 ||
+      formData.username.trim().length === 0 ||
+      formData.password.trim().length === 0 ||
+      formData.cpassword.trim().length === 0
+    ) {
+      // setMessage("all fields are required.");
+      setToast({
+        showToast: true,
+        message: "all fields are required.",
+        type: "danger",
+      });
+      return;
+    } else if (formData.fullname.trim().length < 3) {
+      // setMessage("full name should atleast 3 charecters long.");
+      setToast({
+        showToast: true,
+        message: "full name should atleast 3 charecters long.",
+        type: "danger",
+      });
+      return;
+    } else if (formData.username.trim().length < 4) {
       // setMessage("username or email should atleast be 4 characters long.");
       setToast({
         showToast: true,
@@ -33,7 +67,7 @@ const Login = (props) => {
         type: "danger",
       });
       return;
-    } else if (formData.password.length < 8) {
+    } else if (formData.password.trim().length < 8) {
       // setMessage("password should atleast be 8 characters long.");
       setToast({
         showToast: true,
@@ -59,15 +93,31 @@ const Login = (props) => {
           <div className={styles["head"]} />
           <div className={styles["body"]} />
         </div>
-        <p className={styles["heading"]}>Login</p>
+        <p className={styles["heading"]}>SignUp</p>
         <div className={styles["inputs-div"]}>
+          <input
+            onChange={onChange}
+            value={formData.fullname}
+            type={"text"}
+            id='fullname'
+            name='fullname'
+            placeholder='fullname'
+          />
+          <input
+            onChange={onChange}
+            value={formData.email}
+            type={"email"}
+            id='email'
+            name='email'
+            placeholder='email'
+          />
           <input
             onChange={onChange}
             value={formData.username}
             type={"text"}
             id='username'
             name='username'
-            placeholder='username or email'
+            placeholder='username'
           />
           <input
             onChange={onChange}
@@ -77,12 +127,20 @@ const Login = (props) => {
             name='password'
             placeholder='password'
           />
+          <input
+            onChange={onChange}
+            value={formData.cpassword}
+            type={"password"}
+            id='cpassword'
+            name='cpassword'
+            placeholder='confirm password'
+          />
           <button>submit</button>
           {/* <div className={styles["err-msg-div"]}>{message}</div> */}
         </div>
 
         <p className={styles["p-link"]}>
-          New User? <span className={styles["link"]}>sign up</span>
+          Existing user? <span className={styles["link"]}>login</span>
         </p>
       </form>
       {toast.showToast ? (
@@ -94,4 +152,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default SignUp;

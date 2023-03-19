@@ -1,14 +1,12 @@
+import { Navigate, Outlet } from "react-router-dom";
 import "./App.css";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import SignUp from "./pages/Signup/SignUp";
+import useBearStore from "./state/state";
 
 function App() {
-  return (
-    <div className='App'>
-      {/* <Login /> */}
-      <SignUp />
-    </div>
-  );
+  const isUserValid = useBearStore((state) => state.isUserValid);
+
+  return <div>{isUserValid ? <Outlet /> : <Navigate to={"login"} />}</div>;
 }
 
 export default App;
