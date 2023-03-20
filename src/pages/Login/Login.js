@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./Login.module.css";
 import Toast from "../../UI/Toast";
 import useBearStore from "../../state/state";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = (props) => {
   const [formData, setFormData] = useState({
@@ -98,7 +98,10 @@ const Login = (props) => {
         </div>
 
         <p className={styles["p-link"]}>
-          New User? <span className={styles["link"]}>sign up</span>
+          New User?{" "}
+          <Link to={"/signup"} className={styles["link"]}>
+            sign up
+          </Link>
         </p>
       </form>
       {toast.showToast ? (

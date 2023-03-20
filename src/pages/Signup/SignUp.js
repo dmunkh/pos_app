@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Toast from "../../UI/Toast";
 import styles from "../Login/Login.module.css";
 
@@ -140,7 +141,10 @@ const SignUp = (props) => {
         </div>
 
         <p className={styles["p-link"]}>
-          Existing user? <span className={styles["link"]}>login</span>
+          Existing user?{" "}
+          <Link to={"/login"} className={styles["link"]}>
+            login
+          </Link>
         </p>
       </form>
       {toast.showToast ? (
