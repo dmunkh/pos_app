@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Login.module.css";
-import Toast from "../../UI/Toast";
+import Toast from "../../UI/Toast/Toast";
 import useBearStore from "../../state/state";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -57,8 +57,8 @@ const Login = (props) => {
 
     console.log("FORM DATA ", formData);
 
-    const dbUsername = "ajay";
-    const dbPassword = "ajay@123";
+    const dbUsername = "test";
+    const dbPassword = "test1@23";
 
     if (formData.username === dbUsername && formData.password === dbPassword) {
       setIsUserValid(true);

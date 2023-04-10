@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Toast from "../../UI/Toast";
+import Toast from "../../UI/Toast/Toast";
 import styles from "../Login/Login.module.css";
 
 const SignUp = (props) => {
