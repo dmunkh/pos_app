@@ -65,6 +65,12 @@ const Login = (props) => {
       navigate("/profile");
       // true
       // "/profile"
+    } else {
+      setToast({
+        showToast: true,
+        message: "invalid username or password.",
+        type: "danger",
+      });
     }
   };
 

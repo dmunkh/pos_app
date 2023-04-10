@@ -5,9 +5,8 @@ const Toast = ({ setToast, message, type }) => {
   const [opacity, setOpacity] = useState("opacity-0");
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setOpacity("opacity-1");
-    }, 0);
+    setOpacity("opacity-1");
+
     const timeout2 = setTimeout(() => {
       setOpacity("opacity-0");
     }, 4000);
@@ -18,7 +17,6 @@ const Toast = ({ setToast, message, type }) => {
     }, 4200);
 
     return () => {
-      clearTimeout(timeout);
       clearTimeout(timeout2);
       clearTimeout(timeout3);
     };
