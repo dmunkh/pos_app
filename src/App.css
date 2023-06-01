@@ -26,3 +26,13 @@ body {
   --animation-timing: 200ms ease-in-out;
   --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2);
 }
+
+.opacity-0 {
+  transition: .3s;
+  opacity: 0;
+}
+
+.opacity-1 {
+  transition: .3s;
+  opacity: 1;
+}
