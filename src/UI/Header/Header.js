@@ -3,6 +3,7 @@ import StatsIcon from "../../icons/StatsIcon";
 import { useState } from "react";
 import Alert from "../Alert/Alert";
 import useBearStore from "../../state/state";
+import Menu from "../../UI/Sidebar/menu";
 
 const Header = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -18,8 +19,10 @@ const Header = () => {
       <div className={styles.headerLogo}>
         <StatsIcon />
       </div>
+
       <div className={styles.headerItem}>
         <h1 className={styles.heading}>STATS</h1>
+
         <div className={styles.headerBtnDiv}>
           <button
             onClick={() => setShowAlert(true)}

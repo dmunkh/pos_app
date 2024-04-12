@@ -15,7 +15,7 @@ const Sidebar = () => {
   return (
     <div className={styles.parent}>
       <label className={styles["hamburger-menu"]}>
-        <input type='checkbox' />
+        <input type="checkbox" />
       </label>
       <div className={styles.sidebar}>
         <nav className={styles.nav}>
