@@ -13,7 +13,7 @@ function App() {
   return isUserValid ? (
     <div>
       <Header />
-      <div className='d-flex'>
+      <div className="d-flex">
         <Sidebar />
         <div>
           <Outlet />

@@ -14,14 +14,14 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<App />}>
-          <Route path='profile' element={<Profile />} />
-          <Route path='about' element={<About />} />
-          <Route path='friends' element={<Friends />} />
+        <Route path="/" element={<App />}>
+          <Route path="profile" element={<Profile />} />
+          <Route path="about" element={<About />} />
+          <Route path="friends" element={<Friends />} />
         </Route>
-        <Route path='login' element={<Login />} />
-        <Route path='signup' element={<SignUp />} />
-        <Route path='*' element={<Navigate to={"login"} />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="*" element={<Navigate to={"login"} />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

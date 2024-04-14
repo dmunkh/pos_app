@@ -5,8 +5,9 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { DatePicker, Space } from "antd";
+import { DatePicker, Space, InputNumber } from "antd";
 import axios from "axios";
+import _ from "lodash";
 
 const Friends = () => {
   const usenavigate = useNavigate();
@@ -14,6 +15,8 @@ const Friends = () => {
   const currentDate = dayjs();
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [refresh, setrefresh] = useState(0);
+  const [id, setid] = useState(0);
 
   const dateFormat = "YYYY/MM/DD";
   const weekFormat = "MM/DD";
@@ -23,17 +26,17 @@ const Friends = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://9xz5rjl8ej.execute-api.us-east-1.amazonaws.com/production/users"
+          "https://9xz5rjl8ej.execute-api.us-east-1.amazonaws.com/production/baraa"
         );
         console.log("data", response.data);
-        setData(response.data);
+        setData(_.orderBy(response.data, ["id"]));
       } catch (error) {
         setError(error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [refresh]);
 
   // console.log(sessionStorage.getItem("username"));
   // const data = [
@@ -68,9 +71,23 @@ const Friends = () => {
     try {
       const response = axios.post(
         "https://9xz5rjl8ej.execute-api.us-east-1.amazonaws.com/production/baraa",
-        { id: 10, baraa_ner: "Shosh", une: 7800 }
+        { id: id, baraa_ner: "Shosh", une: 7800 }
       );
+      setrefresh(refresh + 1);
       console.log("return", response.data);
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            "https://9xz5rjl8ej.execute-api.us-east-1.amazonaws.com/production/baraa"
+          );
+          console.log("data", response.data);
+          setData(response.data);
+        } catch (error) {
+          setError(error);
+        }
+      };
+
+      fetchData();
     } catch (error) {
       setError(error);
     }
@@ -78,16 +95,16 @@ const Friends = () => {
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline text-red-600">
+      <h1 className="text-sm font-bold underline text-red-600">
         Бараа жагсаалт
       </h1>
       <DatePicker defaultValue={currentDate} format={dateFormat} />
+      <InputNumber value={id} onChange={(value) => setid(value)} />
       <button onClick={handleClick}>Post Item</button>
       <DataTable value={data} tableStyle={{ minWidth: "50rem" }}>
-        <Column field="shortname" header="Code"></Column>
-        <Column field="user_info" header="Name"></Column>
-        <Column field="userid" author="author"></Column>
-        <Column field="username" header="year"></Column>
+        <Column field="id" header="Code"></Column>
+        <Column field="baraa_ner" header="Name"></Column>
+        <Column field="une" author="author"></Column>
       </DataTable>
     </>
   );
