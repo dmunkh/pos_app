@@ -84,7 +84,7 @@ const SignUp = (props) => {
       type: "",
     });
 
-    console.log("FORM DATA ", formData);
+    // console.log("FORM DATA ", formData);
   };
 
   return (
@@ -100,41 +100,41 @@ const SignUp = (props) => {
             onChange={onChange}
             value={formData.fullname}
             type={"text"}
-            id='fullname'
-            name='fullname'
-            placeholder='fullname'
+            id="fullname"
+            name="fullname"
+            placeholder="fullname"
           />
           <input
             onChange={onChange}
             value={formData.email}
             type={"email"}
-            id='email'
-            name='email'
-            placeholder='email'
+            id="email"
+            name="email"
+            placeholder="email"
           />
           <input
             onChange={onChange}
             value={formData.username}
             type={"text"}
-            id='username'
-            name='username'
-            placeholder='username'
+            id="username"
+            name="username"
+            placeholder="username"
           />
           <input
             onChange={onChange}
             value={formData.password}
             type={"password"}
-            id='password'
-            name='password'
-            placeholder='password'
+            id="password"
+            name="password"
+            placeholder="password"
           />
           <input
             onChange={onChange}
             value={formData.cpassword}
             type={"password"}
-            id='cpassword'
-            name='cpassword'
-            placeholder='confirm password'
+            id="cpassword"
+            name="cpassword"
+            placeholder="confirm password"
           />
           <button>submit</button>
           {/* <div className={styles["err-msg-div"]}>{message}</div> */}

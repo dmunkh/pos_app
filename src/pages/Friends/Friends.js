@@ -25,7 +25,7 @@ const Friends = () => {
         const response = await axios.get(
           "https://9xz5rjl8ej.execute-api.us-east-1.amazonaws.com/production/users"
         );
-        console.log(response.data);
+        console.log("data", response.data);
         setData(response.data);
       } catch (error) {
         setError(error);
@@ -35,7 +35,7 @@ const Friends = () => {
     fetchData();
   }, []);
 
-  console.log(sessionStorage.getItem("username"));
+  // console.log(sessionStorage.getItem("username"));
   // const data = [
   //   {
   //     name: "Dune",
@@ -63,12 +63,26 @@ const Friends = () => {
   //     year: "1932",
   //   },
   // ];
+  const handleClick = () => {
+    console.log("INSERTING");
+    try {
+      const response = axios.post(
+        "https://9xz5rjl8ej.execute-api.us-east-1.amazonaws.com/production/baraa",
+        { id: 10, baraa_ner: "Shosh", une: 7800 }
+      );
+      console.log("return", response.data);
+    } catch (error) {
+      setError(error);
+    }
+  };
+
   return (
     <>
       <h1 className="text-3xl font-bold underline text-red-600">
         Бараа жагсаалт
       </h1>
       <DatePicker defaultValue={currentDate} format={dateFormat} />
+      <button onClick={handleClick}>Post Item</button>
       <DataTable value={data} tableStyle={{ minWidth: "50rem" }}>
         <Column field="shortname" header="Code"></Column>
         <Column field="user_info" header="Name"></Column>
