@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import "./App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SignUp from "./pages/Signup/SignUp";
 import useBearStore from "./state/state";
 import Header from "./UI/Header/Header";

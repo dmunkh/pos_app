@@ -71,7 +71,13 @@ const Friends = () => {
     try {
       const response = axios.post(
         "https://9xz5rjl8ej.execute-api.us-east-1.amazonaws.com/production/baraa",
-        { id: id, baraa_ner: "Shosh", une: 7800 }
+        {
+          id: id,
+          baraa_ner: "Алим",
+          une: 7800,
+          company_id: 1,
+          company_name: "Ачит ихт",
+        }
       );
       setrefresh(refresh + 1);
       console.log("return", response.data);

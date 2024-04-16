@@ -20,6 +20,21 @@ const Sidebar = () => {
       <div className={styles.sidebar}>
         <nav className={styles.nav}>
           <Link
+            to={"/balance"}
+            className={`${styles.navItem}  ${isActive(
+              location.pathname,
+              "/balance"
+            )}`}
+          >
+            {" "}
+            <div className={styles.menuDiv}>
+              <div className={styles.svgIcon}>
+                <AboutIcon />
+              </div>
+              <div className={styles.menuText}>about</div>
+            </div>
+          </Link>
+          <Link
             to={"/profile"}
             className={`${styles.navItem} ${isActive(
               location.pathname,

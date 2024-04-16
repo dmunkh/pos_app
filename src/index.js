@@ -8,6 +8,7 @@ import About from "./pages/About/About";
 import Friends from "./pages/Friends/Friends";
 import SignUp from "./pages/Signup/SignUp";
 import Login from "./pages/Login/Login";
+import Balance from "./pages/balance";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -18,6 +19,7 @@ root.render(
           <Route path="profile" element={<Profile />} />
           <Route path="about" element={<About />} />
           <Route path="friends" element={<Friends />} />
+          <Route path="balance" element={<Balance />} />
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />

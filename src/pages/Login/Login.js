@@ -3,32 +3,14 @@ import styles from "./Login.module.css";
 import Toast from "../../UI/Toast/Toast";
 import useBearStore from "../../state/state";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const Login = (props) => {
   const [customerlist, listupdate] = useState(null);
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://9xz5rjl8ej.execute-api.us-east-1.amazonaws.com/production/users"
-        );
-        console.log(response.data);
-        setData(response.data);
-      } catch (error) {
-        setError(error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   // useEffect(() => {
   //   sessionStorage.clear();
@@ -116,7 +98,7 @@ const Login = (props) => {
           <div className={styles["head"]} />
           <div className={styles["body"]} />
         </div>
-        <p className={styles["heading"]}>Login</p>
+        <p className={styles["heading"]}>Нэвтрэх</p>
         <div className={styles["inputs-div"]}>
           <input
             onChange={onChange}
@@ -124,7 +106,7 @@ const Login = (props) => {
             type={"text"}
             id="username"
             name="username"
-            placeholder="username or email"
+            placeholder="Нэвтрэх нэр"
           />
           <input
             onChange={onChange}
@@ -132,9 +114,9 @@ const Login = (props) => {
             type={"password"}
             id="password"
             name="password"
-            placeholder="password"
+            placeholder="Нууц үг"
           />
-          <button>submit</button>
+          <button>Нэвтрэх</button>
           {/* <div className={styles["err-msg-div"]}>{message}</div> */}
         </div>
 

@@ -37,3 +37,9 @@ body {
   transition: 0.3s;
   opacity: 1;
 }
+
+.p-datatable .p-datatable-header {
+  min-width: 60rem;
+  width: 400px;
+  margin: 0 auto;
+}
