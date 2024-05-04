@@ -75,11 +75,11 @@ const Login = (props) => {
     console.log("FORM DATA ", formData);
 
     const dbUsername = "test";
-    const dbPassword = "test1@23";
+    const dbPassword = "test1234";
 
     if (formData.username === dbUsername && formData.password === dbPassword) {
       setIsUserValid(true);
-      navigate("/profile");
+      navigate("/balance");
       // true
       // "/profile"
     } else {

@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Profile from "./pages/Profile/Profile";
-import About from "./pages/About/About";
+import Baraa from "./pages/Baraa/baraa";
+import Market from "./pages/Delguur/delguur";
 import Friends from "./pages/Friends/Friends";
 import SignUp from "./pages/Signup/SignUp";
 import Login from "./pages/Login/Login";
@@ -16,8 +16,8 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="profile" element={<Profile />} />
-          <Route path="about" element={<About />} />
+          <Route path="baraa" element={<Baraa />} />
+          <Route path="market" element={<Market />} />
           <Route path="friends" element={<Friends />} />
           <Route path="balance" element={<Balance />} />
         </Route>

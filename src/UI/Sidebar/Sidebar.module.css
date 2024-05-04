@@ -1,17 +1,16 @@
 .sidebar {
   padding-top: 100px !important;
-  height: calc(100vh - 80px);
-  width: 80px;
+  height: calc(100vh - 20px);
+  width: 60px;
   flex-shrink: 0;
   background-color: white;
-  box-shadow: .5px 13px 13px .5px #7d7d7d26;
-  transition: .3s;
-
+  box-shadow: 0.5px 13px 13px 0.5px #7d7d7d26;
+  transition: 0.3s;
 }
 
 .btnDiv {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   display: flex;
   justify-content: center;
 }
@@ -22,8 +21,8 @@
 }
 
 .navItem {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-align: center;
   color: rgb(32, 32, 32);
   text-decoration: none;
@@ -32,11 +31,10 @@
 .navItem:hover {
   color: rgb(32, 32, 32);
   background-color: #d1ecff;
-
 }
 
 .active {
-  background-color: #E3F2FD;
+  background-color: #e3f2fd;
 }
 
 .menu {
@@ -44,28 +42,24 @@
   background-color: pink;
 }
 
-
 .sidebar {
   padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 2rem);
 }
 
 .svgIcon {
-
   border-radius: 10px;
-  margin-left: 23px !important;
+  margin-left: 13px !important;
 }
 
 .menuDiv {
   display: flex;
   align-items: center;
-
-
 }
 
 .menuText {
-  margin-left: 10%;
+  margin-left: 5%;
   opacity: 0;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .close {
@@ -75,8 +69,6 @@
 .parent {
   position: relative;
 }
-
-
 
 .hamburger-menu {
   --x-width: calc(var(--hamburger-height) * 1.41421356237);
@@ -100,7 +92,8 @@
   background-color: var(--foreground);
   transform-origin: left center;
   border-radius: 9999px;
-  transition: opacity var(--animation-timing), width var(--animation-timing), rotate var(--animation-timing), translate var(--animation-timing);
+  transition: opacity var(--animation-timing), width var(--animation-timing),
+    rotate var(--animation-timing), translate var(--animation-timing);
 }
 
 .hamburger-menu input {
@@ -109,7 +102,6 @@
   margin: 0;
   outline: none;
   pointer-events: none;
-
 }
 
 .hamburger-menu:has(input:checked)::before {
@@ -136,12 +128,11 @@
   box-shadow: 0 0 0 1px var(--foreground);
 }
 
-.hamburger-menu:has(input:checked)+.sidebar {
-  transition: .3s;
+.hamburger-menu:has(input:checked) + .sidebar {
+  transition: 0.3s;
   width: 250px;
 }
 
-
-.hamburger-menu:has(input:checked)+.sidebar .menuText {
+.hamburger-menu:has(input:checked) + .sidebar .menuText {
   opacity: 1;
 }

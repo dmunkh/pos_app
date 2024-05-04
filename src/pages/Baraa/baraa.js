@@ -21,15 +21,14 @@ import { DataTable } from "primereact/datatable";
 import { ColumnGroup } from "primereact/columngroup";
 import { Row } from "primereact/row";
 import axios from "axios";
-import MODAL from "./balance_modal";
+import MODAL from "./baraa_modal";
 import _ from "lodash";
 
-const Balance = () => {
+const Baraa = () => {
   const usenavigate = useNavigate();
   const [customerlist, listupdate] = useState(null);
   const currentDate = dayjs();
   const [data, setData] = useState(null);
-  const [filterdata, setFilterData] = useState(null);
   const [error, setError] = useState(null);
   const [refresh, setrefresh] = useState(0);
   const [id, setid] = useState(0);
@@ -39,7 +38,6 @@ const Balance = () => {
   const [first, set_first] = useState(0);
   const [per_page, set_per_page] = useState(50);
   const [visible, setvisible] = useState(false);
-  const [chk, setchk] = useState(0);
 
   const dateFormat = "YYYY/MM/DD";
   const weekFormat = "MM/DD";
@@ -49,11 +47,11 @@ const Balance = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          // "https://9xz5rjl8ej.execute-api.us-east-1.amazonaws.com/production/balance"
-          "http://192.168.1.16:5000/api/backend/balance"
+          // "https://9xz5rjl8ej.execute-api.us-east-1.amazonaws.com/production/baraa"
+          // "http://3.0.177.127/api/backend/baraa"
+          "http://localhost:5000/api/backend/baraa"
         );
-        console.log("data", response.data);
-
+        console.log(response.data.response);
         // var result = _(response.data)
         //   .groupBy("baraa_ner")
         //   .map(function (items, baraa_ner) {
@@ -64,9 +62,7 @@ const Balance = () => {
         //   })
         //   .value();
 
-        setData(_.orderBy(response.data.response, ["company_id"]));
-        setFilterData(_.orderBy(response.data.response, ["company_id"]));
-        console.log(response.data);
+        setData(_.orderBy(response.data.response, ["id"]));
       } catch (error) {
         setError(error);
       }
@@ -75,46 +71,8 @@ const Balance = () => {
     fetchData();
   }, []);
 
-  const handleClick = () => {
-    console.log("INSERTING");
-    try {
-      const response = axios.post(
-        "https://9xz5rjl8ej.execute-api.us-east-1.amazonaws.com/production/balance",
-        { id: id, baraa_ner: "banana", company_name: "Orgil" }
-      );
-      setrefresh(refresh + 1);
-      console.log("return", response.data);
-      const fetchData = async () => {
-        try {
-          const response = await axios.get(
-            "https://9xz5rjl8ej.execute-api.us-east-1.amazonaws.com/production/balance"
-          );
-          console.log("data", response.data);
-          setData(response.data);
-        } catch (error) {
-          setError(error);
-        }
-      };
-
-      fetchData();
-    } catch (error) {
-      setError(error);
-    }
-  };
-  const handleChange = (e) => {
-    console.log(
-      "Radio checked:",
-      e.target.value,
-      filterdata,
-      _.filter(filterdata, (a) => a.type === 1)
-    );
-    setchk(e.target.value);
-    setData(_.filter(filterdata, (a) => a.type === parseInt(e.target.value)));
-    // Additional logic here if needed
-  };
-
   return (
-    <div className="p-5">
+    <div className="text-sm p-2">
       <Modal
         style={{ width: "600" }}
         width={800}
@@ -131,18 +89,7 @@ const Balance = () => {
       >
         <MODAL />
       </Modal>
-      <h1 className="text-sm font-bold underline text-red-600">
-        Орлого зарлага
-      </h1>
-      <DatePicker defaultValue={currentDate} format={dateFormat} />
-      <InputNumber value={id} onChange={(value) => setid(value)} />
-      <button onClick={handleClick}>Post Item</button>
-      <hr className="p-2" />
-      <Radio.Group defaultValue="1" buttonStyle="solid" onChange={handleChange}>
-        <Radio.Button value="1">Орлого</Radio.Button>
-        <Radio.Button value="2">Зарлага</Radio.Button>
-        <Radio.Button value="3">Захиалга</Radio.Button>
-      </Radio.Group>
+      <h1 className="text-lg font-bold  text-red-600 pb-2 ">Бараа</h1>{" "}
       <DataTable
         size="small"
         value={data}
@@ -158,7 +105,7 @@ const Balance = () => {
         responsiveLayout="scroll"
         sortMode="multiple"
         rowGroupMode="subheader"
-        groupRowsBy={chk === 3 ? "delguur_ner" : "company_name"}
+        groupRowsBy="typename"
         scrollHeight={window.innerHeight - 360}
         globalFilterFields={["baraa_ner", "company_name"]}
         emptyMessage={
@@ -197,8 +144,8 @@ const Balance = () => {
         }
         rowGroupHeaderTemplate={(data) => {
           return (
-            <div className="text-xs font-semibold bg-blue-50">
-              <span> {chk === 3 ? data.delguur_ner : data.company_name}</span>
+            <div className="text-xs font-semibold">
+              <span> {data.typename}</span>
             </div>
           );
         }}
@@ -285,43 +232,33 @@ const Balance = () => {
           style={{ minWidth: "40px", maxWidth: "40px" }}
           body={(data, row) => row.rowIndex + 1}
         />
-        <Column
+        {/* <Column
           style={{ minWidth: "60px", maxWidth: "60px" }}
           field="id"
           header="Order"
-        />
+        /> */}
 
-        <Column
-          field="delguur_ner"
-          header="Дэлгүүр"
-          style={{ minWidth: "120px", maxWidth: "120px" }}
-        />
         <Column
           field="company_name"
           header="Компани"
           style={{ minWidth: "120px", maxWidth: "120px" }}
         />
-        <Column
-          field="register_date"
+        {/* <Column
+          field="year"
           header="Огноо"
           style={{ minWidth: "90px", maxWidth: "90px" }}
           body={(data) => {
-            return dayjs(data.register_date).format("YYYY-MM-DD");
+            return data.year && data.year + "-" + data.month + "-" + data.day;
           }}
-        />
+        /> */}
         <Column
           field="baraa_ner"
-          header="Name"
+          header="Барааны нэр"
           style={{ minWidth: "120px", maxWidth: "120px" }}
         />
         <Column
-          field="price"
+          field="une"
           header="Нэгж үнэ"
-          style={{ minWidth: "120px", maxWidth: "120px" }}
-        />
-        <Column
-          field="count"
-          header="Хэмжээ"
           style={{ minWidth: "80px", maxWidth: "80px" }}
         />
         <Column
@@ -361,4 +298,4 @@ const Balance = () => {
   );
 };
 
-export default Balance;
+export default Baraa;

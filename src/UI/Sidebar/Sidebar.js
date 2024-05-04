@@ -35,10 +35,10 @@ const Sidebar = () => {
             </div>
           </Link>
           <Link
-            to={"/profile"}
+            to={"/baraa"}
             className={`${styles.navItem} ${isActive(
               location.pathname,
-              "/profile"
+              "/baraa"
             )}`}
           >
             <div className={styles.menuDiv}>
@@ -64,10 +64,10 @@ const Sidebar = () => {
             </div>
           </Link>
           <Link
-            to={"/about"}
+            to={"/market"}
             className={`${styles.navItem}  ${isActive(
               location.pathname,
-              "/about"
+              "/market"
             )}`}
           >
             {" "}
